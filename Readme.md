@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Владимир Вергазов](https://up.htmlacademy.ru/javascript/22/user/1651645).
-* Наставник: `Неизвестно`.
+* Наставник: [Магомед Кандаев](https://htmlacademy.ru/profile/magomedkandaev).
 
 ---
 
