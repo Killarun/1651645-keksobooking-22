@@ -1,12 +1,12 @@
 function getRandomInteger(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  if (max < min || min < 0) {
+  if (max <= min || min < 0) {
     return false;
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-getRandomInteger(1, 10);
+console.log(getRandomInteger(1, 1));
 
 
 function getRandomNumber (min, max, range) {
