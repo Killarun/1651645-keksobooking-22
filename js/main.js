@@ -1,29 +1,21 @@
 function getRandomInteger(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  if (max <= min){
-    return 'Ошибка: Минимальное число больше или равно максимальному.';
+  if (max < min || min < 0) {
+    return false;
   }
   else{
-    if (min >= 0 && max >= 0)
-    {
-      return Math.floor(Math.random() * (max - min + 1)) + min;}
-  }
-  return 'Ошибка: Числа дожны быть больше 0.';
+    return Math.floor(Math.random() * (max - min + 1)) + min;}
 }
-getRandomInteger(1, 1);
+getRandomInteger(1, 10);
 
-
-
-function getRandomLocation (min, max, one) {
-  if (min >= max) {
-    return 'Ошибка: Минимальное число больше или равно максимальному';
+function getRandomPosition (firstCoordinate, secondCoordinate, range) {
+  if (secondCoordinate <= firstCoordinate || firstCoordinate < 0)  {
+    return false;
 
   } else {
-    if (min >= 0 && max >= 0)
-    {
-      return (Math.random() * (max - min) + min).toFixed(one);}
+
+    return Number((Math.random() * (secondCoordinate - firstCoordinate) + firstCoordinate).toFixed(range));
   }
-  return 'Ошибка: Числа дожны быть больше 0.';
 }
-getRandomLocation(1,1,1);
+getRandomPosition(2,10,2);
