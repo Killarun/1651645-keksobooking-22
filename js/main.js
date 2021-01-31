@@ -4,18 +4,15 @@ function getRandomInteger(min, max) {
   if (max < min || min < 0) {
     return false;
   }
-  else{
-    return Math.floor(Math.random() * (max - min + 1)) + min;}
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 getRandomInteger(1, 10);
 
-function getRandomPosition (firstCoordinate, secondCoordinate, range) {
-  if (secondCoordinate <= firstCoordinate || firstCoordinate < 0)  {
+
+function getRandomNumber (min, max, range) {
+  if (max <= min || min < 0)  {
     return false;
-
-  } else {
-
-    return Number((Math.random() * (secondCoordinate - firstCoordinate) + firstCoordinate).toFixed(range));
   }
+  return Number((Math.random() * (max - min) + min).toFixed(range));
 }
-getRandomPosition(2,10,2);
+getRandomNumber(2,10,2);
