@@ -49,7 +49,20 @@ const PHOTO_LINKS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
-const DESCRIPTION = [
+const TITLES = [
+  'Квартира №1',
+  'Квартира №2',
+  'Квартира №3',
+  'Квартира №4',
+  'Квартира №5',
+  'Квартира №6',
+  'Квартира №7',
+  'Квартира №8',
+  'Квартира №9',
+  'Квартира №10',
+];
+
+const DESCRIPTIONS = [
   'Уютная квартира с видом на море 1',
   'Уютная квартира с видом на море 2',
   'Уютная квартира с видом на море 3',
@@ -62,75 +75,65 @@ const DESCRIPTION = [
   'Уютная квартира с видом на море 10',
 ];
 
-const OfferType = {
-  'palace': 'Резиденция',
-  'flat': 'Квартира',
-  'house': 'Дом',
-  'bungalow': 'Бунгало',
-};
+const OFFER_TYPES = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+];
 
-const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
+const getRandomShuffleArrayElement = (elements) => {
 
-const getShuffledArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
+  const clonedElements = elements.slice(0);
+  for (let i = clonedElements.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    const swap = clonedElements[i];
+    clonedElements[i] = clonedElements[j];
+    clonedElements[j] = swap;
   }
+  return clonedElements;
+}
 
-};
+const getRandomArray = (elements) => getRandomShuffleArrayElement(elements).slice(getRandomInteger(0, elements.length - 1));
 
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-
-const getRandomLengthArray = (array) => {
-  getShuffledArray(array.slice(0));
-  let randomLengthArray = array.slice(getRandomInteger(0, array.length - 1));
-  if (randomLengthArray.length === 0) {
-    randomLengthArray = array.slice(getRandomInteger(0, array.length - 1));
-  }
-  return randomLengthArray;
-};
 
 
 
 const createOffer = () => {
-  const location = {
-    x: getRandomNumber(35.65000, 35.70000, 5),
-    y: getRandomNumber(139.70000, 139.80000, 5),
-  };
 
-  const type = getRandomArrayElement(Object.keys(OfferType));
+  const X = getRandomNumber(35.65000, 35.70000, 5);
+  const Y = getRandomNumber(139.70000, 139.80000, 5);
+
   return {
     author: {
       avatar: `img/avatars/user0${getRandomInteger(MIN_USER_COUNT, MAX_USER_COUNT)}.png`,
     },
 
     offer: {
-      title: Object.values(OfferType[type]).join(''),
-      address: `${location.x}, ${location.y}`,
+      title:getRandomArrayElement(TITLES),
+      address: `${X}, ${Y}`,
       price: getRandomInteger(MIN_PRICE, MAX_PRICE),
-      type: type,
+      type: getRandomArrayElement(OFFER_TYPES),
       rooms: getRandomInteger(MIN_ROOMS, MAX_ROOMS),
       guests: getRandomInteger(MIN_GUESTS, MAX_GUESTS),
       checkin: getRandomArrayElement(TIMES),
       checkout: getRandomArrayElement(TIMES),
-      features: getRandomLengthArray(FEATURES),
-      description: DESCRIPTION.splice(getRandomInteger(0, DESCRIPTION.length - 1), 1)[0],
-      photos: getRandomLengthArray(PHOTO_LINKS),
+      features: getRandomArray(FEATURES),
+      description: getRandomArrayElement(DESCRIPTIONS),
+      photos: getRandomArrayElement(PHOTO_LINKS),
 
     },
     location: {
-      x: location.x,
-      y: location.y,
+      x: X,
+      y: Y,
     },
   }
 };
 
 
 
-const similarOffer = new Array(SIMILAR_OFFER_COUNT).fill(null).map(createOffer);
+const getSimilarOffers = (quantity) => new Array(quantity).fill(null).map(createOffer);
 
-
-
-const getSimilarOffer = () => similarOffer;
-
-getSimilarOffer();
+getSimilarOffers(SIMILAR_OFFER_COUNT);
