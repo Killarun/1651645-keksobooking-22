@@ -63,13 +63,13 @@ const DESCRIPTIONS = [
   'Уютная квартира с видом на море 10',
 ];
 
-const OFFER_TYPES = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-];
 
+const OFFER_TYPES = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalow': 'Бунгало',
+};
 
 
 const createOffer = () => {
