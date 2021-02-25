@@ -24,7 +24,7 @@ const featuresContainer = popup.querySelector('.popup__features');
 
 const getWordForm = function (num, wordForms) {
   if (num > 1 && num < 5) return wordForms[1];
-  if (num == 1) return wordForms[0];
+  if (num === 1) return wordForms[0];
   return wordForms[2];
 };
 
@@ -39,7 +39,7 @@ const getFeatures = function(container, features) {
     .join('\n'));
 };
 
-const getPops = function(adData) {
+const  generatePopup = function(adData) {
   popup.querySelector('.popup__avatar').src = adData.author.avatar;
   popup.querySelector('.popup__title').textContent = adData.offer.title;
   popup.querySelector('.popup__text--address').textContent = adData.offer.address;
@@ -53,4 +53,4 @@ const getPops = function(adData) {
   popupList.appendChild(popup);
 };
 
-export { getPops }
+export { generatePopup }
