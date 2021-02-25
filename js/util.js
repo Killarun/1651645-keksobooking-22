@@ -1,4 +1,3 @@
-
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -14,8 +13,6 @@ const getRandomNumber = (min, max, range) => {
   }
   return Number((Math.random() * (max - min) + min).toFixed(range));
 };
-
-
 
 const getRandomShuffleArrayElement = (elements) => {
 

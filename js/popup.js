@@ -1,40 +1,56 @@
-import {getSimilarOffers} from './data.js';
-const templateFragment = document.querySelector('#card').content;
-const template = templateFragment.querySelector('article');
-const fragment = document.createDocumentFragment();
-const quantityCardsFixed = 10;
-const simiralAds = getSimilarOffers(quantityCardsFixed);
-const mapCanvas = document.querySelector('.map__canvas');
-
-const getTypePalace = (typeHousing) => {
-  switch (typeHousing) {
-    case 'palace':
-      return 'Дворец';
-    case 'flat':
-      return 'Квартира';
-    case 'house':
-      return 'Дом';
-    case 'bungalow':
-      return 'Бунгало';
-    default:
-      return '';
-  }
+const GUESTS_WORD_FORMS = [
+  'гостя',
+  'гостей',
+  'гостей',
+];
+const ROOMS_WORD_FORMS = [
+  'комната',
+  'комнаты',
+  'комнат',
+];
+const TYPES = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
 };
 
-for (let i = 0; i < 10; i++) {
-  const elementArds = template.cloneNode(true);
-  elementArds.classList.add('popup');
-  elementArds.querySelector('.popup__title').textContent = simiralAds[i].offer.title;
-  elementArds.querySelector('.popup__text--address').textContent = simiralAds[i].offer.address;
-  elementArds.querySelector('.popup__text--price').textContent = simiralAds[i].offer.price + ' ₽/ночь';
-  elementArds.querySelector('.popup__type').textContent = getTypePalace(simiralAds[i].offer.type);
-  elementArds.querySelector('.popup__text--capacity').textContent = simiralAds[i].offer.rooms + ' комнаты для ' + simiralAds[i].offer.guests + ' гостей';
-  elementArds.querySelector('.popup__text--time').textContent = 'Заезд после ' + simiralAds[i].offer.checkin + ', выезд до ' + simiralAds[i].offer.checkout;
-  elementArds.querySelector('.popup__features').textContent = simiralAds[i].offer.features;
-  elementArds.querySelector('.popup__description').textContent = simiralAds[i].offer.description;
-  elementArds.querySelector('.popup__photo').src = simiralAds[i].author.avatar;
+const popupList = document.querySelector('.map__canvas');
+const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
+const popup = popupTemplate.cloneNode(true);
 
-  fragment.appendChild(elementArds);
-}
+const photosContainer = popup.querySelector('.popup__photos');
+const featuresContainer = popup.querySelector('.popup__features');
 
-mapCanvas.appendChild(fragment.firstElementChild);
+const getWordForm = function (num, wordForms) {
+  if (num > 1 && num < 5) return wordForms[1];
+  if (num == 1) return wordForms[0];
+  return wordForms[2];
+};
+
+const getPhotos = function(container, photos) {
+  container.innerHTML = '';
+  container.insertAdjacentHTML('afterbegin', photos.map((photos) => `<img src="${photos}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('\n'));
+};
+
+const getFeatures = function(container, features) {
+  container.innerHTML = '';
+  container.insertAdjacentHTML('afterbegin', features.map((feature) => `<li class="popup__feature popup__feature--${feature}"></li>`)
+    .join('\n'));
+};
+
+const getPops = function(adData) {
+  popup.querySelector('.popup__avatar').src = adData.author.avatar;
+  popup.querySelector('.popup__title').textContent = adData.offer.title;
+  popup.querySelector('.popup__text--address').textContent = adData.offer.address;
+  popup.querySelector('.popup__text--price').innerHTML = `${adData.offer.price} <span>₽/ночь</span>`;
+  popup.querySelector('.popup__type').textContent = TYPES[adData.offer.type];
+  popup.querySelector('.popup__text--capacity').textContent = `${adData.offer.rooms} ${getWordForm(adData.offer.rooms, ROOMS_WORD_FORMS)} для ${adData.offer.guests} ${getWordForm(adData.offer.guests, GUESTS_WORD_FORMS)}`;
+  popup.querySelector('.popup__text--time').textContent = `Заезд после ${adData.offer.checkin}, выезд до ${adData.offer.checkout}`;
+  popup.querySelector('.popup__description').textContent = adData.offer.description;
+  getPhotos(photosContainer, adData.offer.photos);
+  getFeatures(featuresContainer, adData.offer.features);
+  popupList.appendChild(popup);
+};
+
+export { getPops }

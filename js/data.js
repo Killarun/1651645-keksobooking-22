@@ -64,12 +64,12 @@ const DESCRIPTIONS = [
 ];
 
 
-const OFFER_TYPES = {
-  'palace': 'Дворец',
-  'flat': 'Квартира',
-  'house': 'Дом',
-  'bungalow': 'Бунгало',
-};
+const OFFER_TYPES = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+];
 
 
 const createOffer = () => {
@@ -93,7 +93,7 @@ const createOffer = () => {
       checkout: getRandomArrayElement(TIMES),
       features: getRandomArray(FEATURES),
       description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getRandomArrayElement(PHOTO_LINKS),
+      photos: getRandomArray(PHOTO_LINKS),
 
     },
     location: {
