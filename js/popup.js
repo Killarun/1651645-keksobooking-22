@@ -23,23 +23,28 @@ const photosContainer = popup.querySelector('.popup__photos');
 const featuresContainer = popup.querySelector('.popup__features');
 
 const getWordForm = function (num, wordForms) {
-  if (num > 1 && num < 5) return wordForms[1];
-  if (num === 1) return wordForms[0];
-  return wordForms[2];
+  if (num > 1 && num < 5) {
+    return wordForms[1];
+  } else if (num === 1) {
+    return wordForms[0];
+  } else {
+    return wordForms[2];
+  }
+
 };
 
-const getPhotos = function(container, photos) {
+const getPhotos = function (container, photos) {
   container.innerHTML = '';
   container.insertAdjacentHTML('afterbegin', photos.map((photos) => `<img src="${photos}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('\n'));
 };
 
-const getFeatures = function(container, features) {
+const getFeatures = function (container, features) {
   container.innerHTML = '';
   container.insertAdjacentHTML('afterbegin', features.map((feature) => `<li class="popup__feature popup__feature--${feature}"></li>`)
     .join('\n'));
 };
 
-const  generatePopup = function(adData) {
+const generatePopup = function (adData) {
   popup.querySelector('.popup__avatar').src = adData.author.avatar;
   popup.querySelector('.popup__title').textContent = adData.offer.title;
   popup.querySelector('.popup__text--address').textContent = adData.offer.address;
@@ -53,4 +58,6 @@ const  generatePopup = function(adData) {
   popupList.appendChild(popup);
 };
 
-export { generatePopup }
+export {
+  generatePopup
+}
