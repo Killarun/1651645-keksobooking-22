@@ -24,13 +24,16 @@ const featuresContainer = popup.querySelector('.popup__features');
 
 const getWordForm = function (num, wordForms) {
   if (num > 1 && num < 5) {
+
     return wordForms[1];
-  } else if (num === 1) {
-    return wordForms[0];
-  } else {
-    return wordForms[2];
   }
 
+  if (num === 1) {
+
+    return wordForms[0];
+  }
+
+  return wordForms[2];
 };
 
 const getPhotos = function (container, photos) {
