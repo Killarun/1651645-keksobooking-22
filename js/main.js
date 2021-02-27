@@ -1,5 +1,6 @@
 import {getSimilarOffers} from './data.js';
 import {generatePopup} from './popup.js';
+import './form.js';
 
 const SIMILAR_OFFER_COUNT = 10;
 
