@@ -15,7 +15,7 @@ const TYPES = {
   bungalow: 'Бунгало',
 };
 
-const popupList = document.querySelector('.map__canvas');
+
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 const popup = popupTemplate.cloneNode(true);
 
@@ -58,7 +58,7 @@ const generatePopup = function (adData) {
   popup.querySelector('.popup__description').textContent = adData.offer.description;
   getPhotos(photosContainer, adData.offer.photos);
   getFeatures(featuresContainer, adData.offer.features);
-  popupList.appendChild(popup);
+  return popup;
 };
 
 export {
