@@ -69,7 +69,6 @@ marker.on('moveend', (evt) => {
 });
 
 const addOtherPins = (adsOffers) => {
-
   adsOffers.forEach((otherPinIcons) => {
     const pinIcons = L.icon({
       iconUrl: '../img/pin.svg',
@@ -77,7 +76,7 @@ const addOtherPins = (adsOffers) => {
       iconAnchor: [23, 46],
     });
     L.marker(Object.values(otherPinIcons.location), {icon: pinIcons}).addTo(map)
-    .bindPopup(generatePopup(otherPinIcons), {keepInView: true});
-});
+      .bindPopup(generatePopup(otherPinIcons), {keepInView: true});
+  });
 }
 addOtherPins(adsOffers);
