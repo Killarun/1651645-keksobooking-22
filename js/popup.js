@@ -17,10 +17,7 @@ const TYPES = {
 
 
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
-const popup = popupTemplate.cloneNode(true);
 
-const photosContainer = popup.querySelector('.popup__photos');
-const featuresContainer = popup.querySelector('.popup__features');
 
 const getWordForm = function (num, wordForms) {
   if (num > 1 && num < 5) {
@@ -48,6 +45,7 @@ const getFeatures = function (container, features) {
 };
 
 const generatePopup = function (adData) {
+  const popup = popupTemplate.cloneNode(true);
   popup.querySelector('.popup__avatar').src = adData.author.avatar;
   popup.querySelector('.popup__title').textContent = adData.offer.title;
   popup.querySelector('.popup__text--address').textContent = adData.offer.address;
@@ -56,8 +54,11 @@ const generatePopup = function (adData) {
   popup.querySelector('.popup__text--capacity').textContent = `${adData.offer.rooms} ${getWordForm(adData.offer.rooms, ROOMS_WORD_FORMS)} для ${adData.offer.guests} ${getWordForm(adData.offer.guests, GUESTS_WORD_FORMS)}`;
   popup.querySelector('.popup__text--time').textContent = `Заезд после ${adData.offer.checkin}, выезд до ${adData.offer.checkout}`;
   popup.querySelector('.popup__description').textContent = adData.offer.description;
+  const photosContainer = popup.querySelector('.popup__photos');
+  const featuresContainer = popup.querySelector('.popup__features');
   getPhotos(photosContainer, adData.offer.photos);
   getFeatures(featuresContainer, adData.offer.features);
+
   return popup;
 };
 
