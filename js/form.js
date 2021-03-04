@@ -1,3 +1,4 @@
+
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
 const timeIn = document.querySelector('#timein');
