@@ -1,10 +1,12 @@
 /* global L:readonly */
 import { getSimilarOffers } from './data.js';
 import {  generatePopup } from './popup.js';
+
 const MARKER_START = {
   lat: 35.68943,
   lng: 139.69276,
 };
+
 const MAP_ZOOM = 10;
 const MAIN_PIN_SIZE = [52, 52];
 const MAIN_PIN_POINTER = [26, 52];
@@ -16,6 +18,10 @@ const mapAddress = document.querySelector('#address');
 const adsOffers = getSimilarOffers(10);
 const fieldsForm = document.querySelectorAll('form input, form select, form textarea, form button');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
 const setDisabled = function () {
 
   formMain.classList.add('ad-form--disabled');
@@ -30,7 +36,7 @@ const fillAdress = function (coordinates) {
 
   }
 
-}
+};
 
 const setEnable = function () {
   formMain.classList.remove('ad-form--disabled');
@@ -81,3 +87,5 @@ const addOtherPins = (adsOffers) => {
   });
 }
 addOtherPins(adsOffers);
+
+export { map, MARKER_START };

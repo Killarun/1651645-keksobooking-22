@@ -27,8 +27,12 @@
 
       <!-- Фильтрация объявлений -->
       <div class="map__filters-container">
+<<<<<<< HEAD
         <form action="https://22.javascript.pages.academy/keksobooking" method="post" enctype="multipart/form-data"
         class="map__filters" autocomplete="off">
+=======
+        <form action="https://22.javascript.pages.academy/keksobooking" class="map__filters" autocomplete="off">
+>>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
           <select name="housing-type" id="housing-type" class="map__filter">
             <option value="any" selected>Любой тип жилья</option>
             <option value="palace">Дворец</option>
@@ -75,7 +79,8 @@
     <!-- Форма объявления -->
     <section class="notice">
       <h2 class="notice__title">Ваше объявление</h2>
-      <form class="ad-form" method="post" enctype="multipart/form-data" autocomplete="off">
+      <form class="ad-form" method="post" enctype="multipart/form-data" action="https://22.javascript.pages.academy/keksobooking"
+      autocomplete="off">
         <fieldset class="ad-form-header">
           <legend class="ad-form-header__title">Ваша фотография (для карты)</legend>
           <div class="ad-form-header__upload">
@@ -83,7 +88,11 @@
               <img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">
             </div>
             <div class="ad-form__field">
+<<<<<<< HEAD
               <input type="file" id="avatar" name="avatar" class="ad-form-header__input visually-hidden" accept="image/*">
+=======
+              <input type="file" id="avatar" name="avatar" class="ad-form-header__input visually-hidden" accept="image/*" required>
+>>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
               <label class="ad-form-header__drop-zone" for="avatar">Загрузить<br>фото...</label>
             </div>
             <p class="ad-form-header__info">Заполните все обязательные поля, назначьте цену, загрузите аватар и фото жилья. Придумайте интересное описание. Оно сделает объявление более живым и привлекательным. Получившееся объявление должно давать гостям полное представление о вашем жилье.</p>
@@ -108,8 +117,12 @@
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="price">Цена за ночь, руб.</label>
+<<<<<<< HEAD
           <input id="price" name="price" type="number" placeholder="0" required max="1000000"
           >
+=======
+          <input id="price" name="price" type="number" placeholder="1000" required min="1000" max="1000000">
+>>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--time">
           <label class="ad-form__label" for="timein">Время заезда и выезда</label>
@@ -136,10 +149,17 @@
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="capacity">Количество мест</label>
           <select id="capacity" name="capacity">
+<<<<<<< HEAD
             <option value="3" selected>для 3 гостей</option>
             <option value="2">для 2 гостей</option>
             <option value="1" selected>для 1 гостя</option>
             <option value="0">не для гостей</option>
+=======
+            <option value="3" disabled>для 3 гостей</option>
+            <option value="2" disabled>для 2 гостей</option>
+            <option value="1" disabled>для 1 гостя</option>
+            <option value="0" disabled>не для гостей</option>
+>>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
           </select>
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide features">
@@ -165,7 +185,12 @@
           <label class="ad-form__label">Фотография жилья</label>
           <div class="ad-form__photo-container">
             <div class="ad-form__upload">
+<<<<<<< HEAD
               <input type="file" id="images" name="images" class="ad-form__input visually-hidden" accept="image/*">
+=======
+              <input type="file" id="images" name="images" class="ad-form__input visually-hidden" accept="image/*"
+              >
+>>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
               <label for="images" class="ad-form__drop-zone">Загрузить<br>фото...</label>
             </div>
             <div class="ad-form__photo"></div>
