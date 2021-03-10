@@ -36,4 +36,4 @@ const pullDataServer = (formData) => {
       body: formData,
     })
 };
-export {pullDataServer, checkServerStatus };
+export {pullDataServer};
