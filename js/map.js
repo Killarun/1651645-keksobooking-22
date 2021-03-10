@@ -18,10 +18,6 @@ const mapAddress = document.querySelector('#address');
 const adsOffers = getSimilarOffers(10);
 const fieldsForm = document.querySelectorAll('form input, form select, form textarea, form button');
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 85c5379bb2a2f34e3e223f1df8576b689af15952
 const setDisabled = function () {
 
   formMain.classList.add('ad-form--disabled');

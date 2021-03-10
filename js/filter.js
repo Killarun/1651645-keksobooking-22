@@ -4,12 +4,12 @@ const quantityGuestValues = quantityGuestsPlace.children;
 
 
 const disablePlace = function (listElements) {
-  for (let currentValue of listElements) {
+  for (const currentValue of listElements) {
     currentValue.setAttribute('disabled', 'disabled');
   }
 };
 
-const checkRooms= function () {
+const onCheckRooms= function () {
   disablePlace(quantityGuestValues);
   if (this.value === '1') {
     quantityGuestsPlace.options[2].removeAttribute('disabled');
@@ -34,4 +34,4 @@ const checkRooms= function () {
 };
 
 
-quantityRooms.addEventListener('change', checkRooms);
+quantityRooms.addEventListener('change', onCheckRooms);
