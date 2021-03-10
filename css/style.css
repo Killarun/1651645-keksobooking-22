@@ -88,7 +88,22 @@ fieldset {
   height: 500px;
   background-color: #dddddd;
 }
-
+.throw-error{
+  opacity: 0.7;
+    font-size: smaller;
+    color: white;
+    background-color: black;
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    z-index: 450;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /**
  * Фильтры объявления
@@ -145,6 +160,7 @@ fieldset {
   -webkit-box-shadow: 0 0 2px 2px #ff6547;
           box-shadow: 0 0 2px 2px #ff6547;
 }
+
 
 .map__feature {
   display: inline-block;
