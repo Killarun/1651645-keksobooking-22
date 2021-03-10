@@ -1,6 +1,12 @@
-import {returnMainMarkerPosition} from './map.js';
-import {pullDataServer} from './server.js';
-import {resetAddressCoordinates} from './map.js';
+import {
+  returnMainMarkerPosition
+} from './map.js';
+import {
+  pullDataServer
+} from './server.js';
+import {
+  resetAddressCoordinates
+} from './map.js';
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
 const timeIn = document.querySelector('#timein');
@@ -116,6 +122,3 @@ formMain.addEventListener('submit', (evt) => {
     .then(() => showSuccessfulMessage(success))
     .catch(() => showErrorMessage(error))
 });
-
-console.log(pullDataServer())
-console.log(checkServerStatus())
