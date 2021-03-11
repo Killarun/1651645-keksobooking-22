@@ -1,6 +1,10 @@
+
+'use strict';
+//import L from 'leaflet';
 /* global L:readonly */
-import { getSimilarOffers } from './data.js';
-import {  generatePopup } from './popup.js';
+import {
+  generatePopup
+} from './popup.js';
 
 const MARKER_START = {
   lat: 35.68943,
@@ -15,7 +19,6 @@ const PIN_POINTER = [23, 46];
 const formMain = document.querySelector('.ad-form');
 const mapFilter = document.querySelector('.map__filters');
 const mapAddress = document.querySelector('#address');
-const adsOffers = getSimilarOffers(10);
 const fieldsForm = document.querySelectorAll('form input, form select, form textarea, form button');
 
 const setDisabled = function () {
@@ -31,7 +34,10 @@ const fillAdress = function (coordinates) {
     return mapAddress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 
   }
+};
 
+const resetAddressCoordinates = () => {
+  fillAdress.value = (MARKER_START);
 };
 
 const setEnable = function () {
@@ -71,17 +77,38 @@ marker.on('move', (evt) => {
   mapAddress.value = (evt.target.getLatLng().lat.toFixed(5) + ', ' + evt.target.getLatLng().lng.toFixed(5));
 });
 
-const addOtherPins = (adsOffers) => {
-  adsOffers.forEach((otherPinIcon) => {
-    const pinIcon = L.icon({
-      iconUrl: '../img/pin.svg',
-      iconSize: PIN_SIZE,
-      iconAnchor: PIN_POINTER,
-    });
-    L.marker(Object.values(otherPinIcon.location), {icon: pinIcon}).addTo(map)
-      .bindPopup(generatePopup(otherPinIcon), {keepInView: true});
-  });
-}
-addOtherPins(adsOffers);
 
-export { map, MARKER_START };
+const addOtherPins = (adsOffers) => {
+  const otherPinIcon = L.icon({
+    iconUrl: '../img/pin.svg',
+    iconSize: PIN_SIZE,
+    iconAnchor: PIN_POINTER,
+
+  });
+  adsOffers.forEach(function (ad) {
+    const otherPinMarker = L.marker({
+      lat: ad.location.lat,
+      lng: ad.location.lng,
+
+    }, {
+      icon: otherPinIcon,
+    });
+    otherPinMarker.addTo(map);
+    otherPinMarker.bindPopup(generatePopup(ad));
+
+  });
+};
+
+const returnMainMarkerPosition = (coordinates) => {
+  marker.setLatLng(MARKER_START);
+  mapAddress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
+
+};
+
+export {
+  map,
+  MARKER_START,
+  returnMainMarkerPosition,
+  resetAddressCoordinates,
+  addOtherPins
+};
