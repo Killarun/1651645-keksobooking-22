@@ -1,3 +1,4 @@
+'use strict';
 import {
   returnMainMarkerPosition
 } from './map.js';
@@ -6,6 +7,9 @@ import {
 } from './server.js';
 import {
   resetAddressCoordinates
+} from './map.js';
+import{
+  MARKER_START
 } from './map.js';
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
@@ -75,7 +79,7 @@ const showSuccessfulMessage = function (element) {
   adPromo.insertAdjacentElement('beforebegin', element);
   onCloseModalWindow(success);
   onCloseModalWindowEsc(success);
-  return element;
+
 };
 
 // Error listener
@@ -91,7 +95,7 @@ const showErrorMessage = function (element) {
   onCloseModalWindow(error);
   onCloseModalWindowEsc(error);
   onCloseButtonErrorMesage();
-  return element;
+
 };
 
 // Clear form
@@ -118,7 +122,7 @@ formMain.addEventListener('submit', (evt) => {
   pullDataServer(formData)
     .then(checkStatus)
     .then(() => formMain.reset())
-    .then(() => returnMainMarkerPosition())
+    .then(() => returnMainMarkerPosition(MARKER_START))
     .then(() => showSuccessfulMessage(success))
     .catch(() => showErrorMessage(error))
 });
