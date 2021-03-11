@@ -85,7 +85,7 @@ const addOtherPins = (adsOffers) => {
     iconAnchor: PIN_POINTER,
 
   });
-  adsOffers.forEach(function (ad) {
+  adsOffers.slice(0, 10).forEach(function (ad) {
     const otherPinMarker = L.marker({
       lat: ad.location.lat,
       lng: ad.location.lng,
@@ -97,6 +97,7 @@ const addOtherPins = (adsOffers) => {
     otherPinMarker.bindPopup(generatePopup(ad));
 
   });
+  return adsOffers;
 };
 
 const returnMainMarkerPosition = (coordinates) => {
@@ -105,10 +106,24 @@ const returnMainMarkerPosition = (coordinates) => {
 
 };
 
+const removeMarkers = () => {
+  map.eachLayer((layer) => {
+    if (layer.getElement) {
+      layer.remove() }
+  });
+  marker.addTo(map);
+};
+
+const removePopup = () => {
+  map.closePopup();
+};
+
 export {
   map,
   MARKER_START,
   returnMainMarkerPosition,
   resetAddressCoordinates,
-  addOtherPins
+  addOtherPins,
+  removeMarkers,
+  removePopup
 };

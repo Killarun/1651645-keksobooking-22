@@ -79,7 +79,6 @@ const showSuccessfulMessage = function (element) {
   adPromo.insertAdjacentElement('beforebegin', element);
   onCloseModalWindow(success);
   onCloseModalWindowEsc(success);
-
 };
 
 // Error listener
@@ -95,7 +94,6 @@ const showErrorMessage = function (element) {
   onCloseModalWindow(error);
   onCloseModalWindowEsc(error);
   onCloseButtonErrorMesage();
-
 };
 
 // Clear form
