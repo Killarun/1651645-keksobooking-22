@@ -12,8 +12,6 @@ const MARKER_START = {
 };
 
 const MAP_ZOOM = 10;
-const CITY_COORDINATE_X = 35.68943;
-const CITY_COORDINATE_Y = 139.69276;
 const MAIN_PIN_SIZE = [52, 52];
 const MAIN_PIN_POINTER = [26, 52];
 const PIN_SIZE = [46, 46];
@@ -101,9 +99,9 @@ const addOtherPins = (adsOffers) => {
   });
 };
 
-const returnMainMarkerPosition = () => {
+const returnMainMarkerPosition = (coordinates) => {
   marker.setLatLng(MARKER_START);
-  mapAddress.value = CITY_COORDINATE_X.toFixed(5) + ', ' + CITY_COORDINATE_Y.toFixed(5);
+  mapAddress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 
 };
 
