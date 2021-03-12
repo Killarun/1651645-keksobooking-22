@@ -121,5 +121,8 @@ export {
   resetAddressCoordinates,
   addOtherPins,
   removeMarkers
+<<<<<<< HEAD
 
+=======
+>>>>>>> module8-task2
 };
