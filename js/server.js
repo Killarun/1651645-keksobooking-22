@@ -1,6 +1,6 @@
 'use strict';
 import {addOtherPins} from './map.js';
-import {filterHouseTypes} from './filter.js';
+import {filterAds} from './filter.js';
 
 const SERVER_DATA = 'https://22.javascript.pages.academy/keksobooking/data';
 const SERVER_POST = 'https://22.javascript.pages.academy/keksobooking';
@@ -29,7 +29,7 @@ fetch(SERVER_DATA)
   .then(checkServerStatus)
   .then((response) => response.json())
   .then(addOtherPins)
-  .then(filterHouseTypes)
+  .then(filterAds)
   .catch((error) => (error));
 
 const pullDataServer = (formData) => {
