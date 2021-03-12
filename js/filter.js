@@ -67,7 +67,7 @@ const filterRooms = function(element) {
 const filterGuests = function(element) {
   return filterTemplate(element, guestNumbers, 'guests');
 };
-// ~features
+// ~features!
 const filterFeatures = function(element) {
   const checkedFeatures = houseFeatures.querySelectorAll('input:checked');
   return Array.from(checkedFeatures).every(function(item) {
