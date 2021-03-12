@@ -2,8 +2,12 @@
 //import L from 'leaflet';
 /* global _:readonly */
 
-import {removeMarkers} from './map.js';
-import {addOtherPins} from './map.js';
+import {
+  removeMarkers
+} from './map.js';
+import {
+  addOtherPins
+} from './map.js';
 
 const INTERVAL = 500;
 
@@ -12,7 +16,9 @@ const houseTypes = mapFilters.querySelector('#housing-type');
 const housePrice = mapFilters.querySelector('#housing-price');
 const roomNumbers = mapFilters.querySelector('#housing-rooms');
 const guestNumbers = mapFilters.querySelector('#housing-guests');
-const adsFeatures = mapFilters.querySelector('#housing-features');
+const houseFeatures = mapFilters.querySelector('#housing-features');
+
+console.log(houseTypes)
 
 const priceFilter = {
   LOW: {
@@ -30,51 +36,61 @@ const priceFilter = {
 };
 
 
-const filterTemplate = function(element, property, meaning){
+// Template filter
+const filterTemplate = function (element, property, meaning) {
   if (property.value === 'any') {
     return true;
   }
   return element.offer[meaning].toString() === property.value;
 };
 
-const filterHouseTypes = function(element) {
+//House filter
+const filterHouse = function(element) {
   return filterTemplate(element, houseTypes, 'type');
 };
 
-const filterHousePrice = function(element) {
-  const filterPriceValue = priceFilter[housePrice.value.toUpperCase()];
-  if(housePrice.value === 'any'){
+
+//Price filter
+const filterPrice = function(element) {
+  const filteringPrice = priceFilter[housePrice.value.toUpperCase()];
+  if (housePrice.value === 'any') {
     return true;
   }
-  return element.offer.price >= filterPriceValue.MIN && element.offer.price <= filterPriceValue.MAX;
-}
+  return element.offer.price >= filteringPrice.MIN && element.offer.price <= filteringPrice.MAX;
+};
 
-const filterHouseRooms = function(element) {
+// ~ rooms
+const filterRooms = function(element) {
   return filterTemplate(element, roomNumbers, 'rooms');
-}
-
+};
+// ~guests
 const filterGuests = function(element) {
   return filterTemplate(element, guestNumbers, 'guests');
-}
-
-const filterAdsFeatures = function(element) {
-  const checkedFeatures = adsFeatures.querySelectorAll('input:checked');
+};
+// ~features
+const filterFeatures = function(element) {
+  const checkedFeatures = houseFeatures.querySelectorAll('input:checked');
   return Array.from(checkedFeatures).every(function(item) {
     return element.offer.features.includes(item.value);
   });
 };
 
-const filterAds = (housingElements) => {
+
+// All filters go
+const filterHouseTypes = function (houseElements) {
   mapFilters.addEventListener('change', _.debounce(() => {
-    const sameTypeHousing = housingElements.filter(filterHouseTypes)
-      .filter(filterHousePrice)
-      .filter(filterHouseRooms)
+    const sameType = houseElements
+      .filter(filterHouse)
+      .filter(filterPrice)
+      .filter(filterRooms)
       .filter(filterGuests)
-      .filter(filterAdsFeatures);
+      .filter(filterFeatures);
     removeMarkers();
-    addOtherPins(sameTypeHousing);
+    addOtherPins(sameType);
   }, INTERVAL));
 };
 
 
-export {filterAds};
+export {
+  filterHouseTypes
+};

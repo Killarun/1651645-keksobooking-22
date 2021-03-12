@@ -114,16 +114,11 @@ const removeMarkers = () => {
   marker.addTo(map);
 };
 
-const removePopup = () => {
-  map.closePopup();
-};
-
 export {
   map,
   MARKER_START,
   returnMainMarkerPosition,
   resetAddressCoordinates,
   addOtherPins,
-  removeMarkers,
-  removePopup
+  removeMarkers
 };
