@@ -18,7 +18,6 @@ const roomNumbers = mapFilters.querySelector('#housing-rooms');
 const guestNumbers = mapFilters.querySelector('#housing-guests');
 const houseFeatures = mapFilters.querySelector('#housing-features');
 
-console.log(houseTypes)
 
 const priceFilter = {
   LOW: {
@@ -48,15 +47,6 @@ const filterTemplate = function (element, property, meaning) {
 const filterHouse = function(element) {
   return filterTemplate(element, houseTypes, 'type');
 };
-
-// Template filter
-const filterTemplate = function(element){
-  if (houseTypes.value === 'any') {
-    return true;
-  }
-  return element.offer.type === houseTypes.value;
-};
-
 //Price filter
 const filterPrice = function(element) {
   const filteringPrice = priceFilter[housePrice.value.toUpperCase()];
@@ -70,6 +60,7 @@ const filterPrice = function(element) {
 const filterRooms = function(element) {
   return filterTemplate(element, roomNumbers, 'rooms');
 };
+
 // ~guests
 const filterGuests = function(element) {
   return filterTemplate(element, guestNumbers, 'guests');
