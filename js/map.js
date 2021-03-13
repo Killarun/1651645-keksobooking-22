@@ -121,5 +121,4 @@ export {
   resetAddressCoordinates,
   addOtherPins,
   removeMarkers
-
 };
