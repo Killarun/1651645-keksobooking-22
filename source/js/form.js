@@ -1,16 +1,11 @@
 'use strict';
 import {
-  returnMainMarkerPosition
+  returnMainMarkerPosition, resetAddressCoordinates,  MARKER_START
 } from './map.js';
 import {
   pullDataServer
 } from './server.js';
-import {
-  resetAddressCoordinates
-} from './map.js';
-import{
-  MARKER_START
-} from './map.js';
+
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
 const timeIn = document.querySelector('#timein');
@@ -47,25 +42,20 @@ const onTimeOutChange = function () {
   timeIn.selectedIndex = timeOut.selectedIndex;
 };
 
-
-// listeners CheckIn, CheckOut
 typeBuilding.addEventListener('change', onTypeBuldingChange);
 timeIn.addEventListener('change', onTimeInChange);
 timeOut.addEventListener('change', onTimeOutChange);
 
-// Close up
 const onCloseModalWindow = function (element) {
   document.addEventListener('click', () => {
     removeWindowMessage(element);
   });
 };
 
-// Remove DOM elements
 const removeWindowMessage = function (element) {
   element.remove();
 };
 
-//ESC keydown
 const onCloseModalWindowEsc = function (element) {
   window.addEventListener('keydown', (evt) => {
     if (evt.keyCode === 27) {
@@ -74,29 +64,18 @@ const onCloseModalWindowEsc = function (element) {
   });
 };
 
-// Show message successful, then close
-const showSuccessfulMessage = function (element) {
+const showMessageResult= function (element) {
   adPromo.insertAdjacentElement('beforebegin', element);
-  onCloseModalWindow(success);
-  onCloseModalWindowEsc(success);
+  onCloseModalWindow(element);
+  onCloseModalWindowEsc(element);
 };
 
-// Error listener
-const onCloseButtonErrorMesage = () => {
+const onCloseButtonErrorMessage = function() {
   adButtonClose.addEventListener('click', () => {
     removeWindowMessage(error);
   });
 };
 
-// Error message
-const showErrorMessage = function (element) {
-  adPromo.insertAdjacentElement('beforebegin', element);
-  onCloseModalWindow(error);
-  onCloseModalWindowEsc(error);
-  onCloseButtonErrorMesage();
-};
-
-// Clear form
 adClearButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   formMain.reset();
@@ -104,15 +83,14 @@ adClearButton.addEventListener('click', (evt) => {
   resetAddressCoordinates();
 });
 
-const checkStatus = (response) => {
+const checkStatus = function (response) {
   if (response.ok) {
     return response;
   } else {
-    throw Error('Произошла ошибка при отправке данных на сервер');
+    throw Error('При отправке данных на сервер произошла ошибка');
   }
 };
 
-// Submit form
 formMain.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const formData = new FormData(evt.target);
@@ -121,6 +99,9 @@ formMain.addEventListener('submit', (evt) => {
     .then(checkStatus)
     .then(() => formMain.reset())
     .then(() => returnMainMarkerPosition(MARKER_START))
-    .then(() => showSuccessfulMessage(success))
-    .catch(() => showErrorMessage(error))
+    .then(() => showMessageResult(success))
+    .catch(() => {
+      showMessageResult(error)
+      onCloseButtonErrorMessage()
+    })
 });

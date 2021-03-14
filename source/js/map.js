@@ -1,7 +1,7 @@
-
 'use strict';
 //import L from 'leaflet';
 /* global L:readonly */
+
 import {
   generatePopup
 } from './popup.js';
@@ -32,7 +32,6 @@ setDisabled();
 const fillAdress = function (coordinates) {
   if (!formMain.classList.contains('ad-form--disabled')) {
     return mapAddress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
-
   }
 };
 
@@ -43,7 +42,6 @@ const resetAddressCoordinates = () => {
 const setEnable = function () {
   formMain.classList.remove('ad-form--disabled');
   mapFilter.classList.remove('ad-form--disabled');
-
   fieldsForm.forEach(elem => elem.removeAttribute('disabled', 'disabled'));
   mapAddress.value = fillAdress(MARKER_START);
   mapAddress.setAttribute('readonly', 'readonly');
@@ -52,7 +50,6 @@ const setEnable = function () {
 const map = L.map('map-canvas')
   .on('load', setEnable)
   .setView(MARKER_START, MAP_ZOOM);
-
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -77,37 +74,33 @@ marker.on('move', (evt) => {
   mapAddress.value = (evt.target.getLatLng().lat.toFixed(5) + ', ' + evt.target.getLatLng().lng.toFixed(5));
 });
 
-
-const addOtherPins = (adsOffers) => {
+const addOtherPins = function (adsOffers) {
   const otherPinIcon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: PIN_SIZE,
     iconAnchor: PIN_POINTER,
-
   });
+
   adsOffers.slice(0, 10).forEach(function (ad) {
     const otherPinMarker = L.marker({
       lat: ad.location.lat,
       lng: ad.location.lng,
-
     }, {
       icon: otherPinIcon,
     });
     otherPinMarker.addTo(map);
     otherPinMarker.bindPopup(generatePopup(ad));
-
   });
   return adsOffers;
 };
 
-const returnMainMarkerPosition = (coordinates) => {
+const returnMainMarkerPosition = function (coordinates) {
   marker.setLatLng(MARKER_START);
   mapAddress.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
-
 };
 
-const removeMarkers = () => {
-  map.eachLayer((layer) => {
+const removeMarkers = function () {
+  map.eachLayer(function (layer) {
     if (layer.getElement) {
       layer.remove() }
   });

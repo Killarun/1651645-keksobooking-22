@@ -4,7 +4,7 @@ import {filterHouseTypes} from './filter.js';
 
 const SERVER_DATA = 'https://22.javascript.pages.academy/keksobooking/data';
 const SERVER_POST = 'https://22.javascript.pages.academy/keksobooking';
-const displayErrorMessage = () =>{
+const displayErrorMessage = function () {
   const promo = document.querySelector('.map__canvas');
   const divError = document.createElement('div');
   divError.innerHTML = 'Во время загрузки объявлений произошла ошибка. Пожалуйста перезагрузите страницу!';
@@ -15,7 +15,7 @@ const displayErrorMessage = () =>{
   }, 3000)
 };
 
-const checkServerStatus = (response) => {
+const checkServerStatus = function (response) {
   if (response.ok) {
     return response;
   } else {
@@ -32,7 +32,7 @@ fetch(SERVER_DATA)
   .then(filterHouseTypes)
   .catch((error) => (error));
 
-const pullDataServer = (formData) => {
+const pullDataServer = function (formData) {
   return fetch(SERVER_POST,
     {
       method: 'POST',
