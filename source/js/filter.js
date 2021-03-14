@@ -3,7 +3,6 @@
 import _ from 'lodash';
 //import L from 'leaflet';
 
-
 import {
   removeMarkers, addOtherPins
 } from './map.js';
