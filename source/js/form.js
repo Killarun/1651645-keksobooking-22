@@ -1,10 +1,6 @@
 'use strict';
-import {
-  returnMainMarkerPosition, resetAddressCoordinates,  MARKER_START
-} from './map.js';
-import {
-  pullDataServer
-} from './server.js';
+import { returnMainMarkerPosition, resetAddressCoordinates,  MARKER_START } from './map.js';
+import { pullDataServer } from './server.js';
 
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
