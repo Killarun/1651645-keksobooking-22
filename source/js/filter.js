@@ -1,23 +1,19 @@
 'use strict';
+
+import _ from 'lodash';
 //import L from 'leaflet';
-/* global _:readonly */
 
 import {
-  removeMarkers
-} from './map.js';
-import {
-  addOtherPins
+  removeMarkers, addOtherPins
 } from './map.js';
 
 const INTERVAL = 500;
-
 const mapFilters = document.querySelector('.map__filters');
 const houseTypes = mapFilters.querySelector('#housing-type');
 const housePrice = mapFilters.querySelector('#housing-price');
 const roomNumbers = mapFilters.querySelector('#housing-rooms');
 const guestNumbers = mapFilters.querySelector('#housing-guests');
 const houseFeatures = mapFilters.querySelector('#housing-features');
-
 
 const priceFilter = {
   LOW: {
@@ -34,8 +30,6 @@ const priceFilter = {
   },
 };
 
-
-// Template filter
 const filterTemplate = function (element, property, meaning) {
   if (property.value === 'any') {
     return true;
@@ -43,12 +37,11 @@ const filterTemplate = function (element, property, meaning) {
   return element.offer[meaning].toString() === property.value;
 };
 
-//House filter
-const filterHouse = function(element) {
-  return filterTemplate(element, houseTypes, 'type');
+const filterItemsHouse = function (element) {
+  return filterTemplate(element, houseTypes, 'type') && filterTemplate(element, roomNumbers, 'rooms') && filterTemplate(element, guestNumbers, 'guests');
 };
-//Price filter
-const filterPrice = function(element) {
+
+const filterPrice = function (element) {
   const filteringPrice = priceFilter[housePrice.value.toUpperCase()];
   if (housePrice.value === 'any') {
     return true;
@@ -56,38 +49,23 @@ const filterPrice = function(element) {
   return element.offer.price >= filteringPrice.MIN && element.offer.price <= filteringPrice.MAX;
 };
 
-// ~ rooms
-const filterRooms = function(element) {
-  return filterTemplate(element, roomNumbers, 'rooms');
-};
-
-// ~guests
-const filterGuests = function(element) {
-  return filterTemplate(element, guestNumbers, 'guests');
-};
-// ~features!
-const filterFeatures = function(element) {
+const filterFeatures = function (element) {
   const checkedFeatures = houseFeatures.querySelectorAll('input:checked');
   return Array.from(checkedFeatures).every(function(item) {
     return element.offer.features.includes(item.value);
   });
 };
 
-
-// All filters go
 const filterHouseTypes = function (houseElements) {
   mapFilters.addEventListener('change', _.debounce(() => {
     const sameType = houseElements
-      .filter(filterHouse)
+      .filter(filterItemsHouse)
       .filter(filterPrice)
-      .filter(filterRooms)
-      .filter(filterGuests)
       .filter(filterFeatures);
     removeMarkers();
     addOtherPins(sameType);
   }, INTERVAL));
 };
-
 
 export {
   filterHouseTypes

@@ -1,3 +1,5 @@
+'use strict'
+
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -14,7 +16,7 @@ const getRandomNumber = (min, max, range) => {
   return Number((Math.random() * (max - min) + min).toFixed(range));
 };
 
-const getRandomShuffleArrayElement = (elements) => {
+const getRandomShuffleArrayElement = function (elements) {
 
   const clonedElements = elements.slice(0);
   for (let i = clonedElements.length - 1; i > 0; i--) {
@@ -26,8 +28,12 @@ const getRandomShuffleArrayElement = (elements) => {
   return clonedElements;
 }
 
-const getRandomArray = (elements) => getRandomShuffleArrayElement(elements).slice(getRandomInteger(0, elements.length - 1));
+const getRandomArray = function (elements) {
+  getRandomShuffleArrayElement(elements).slice(getRandomInteger(0, elements.length - 1))
+};
 
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+const getRandomArrayElement = function (elements) {
+  elements[getRandomInteger(0, elements.length - 1)]
+};
 
 export  {getRandomInteger, getRandomNumber, getRandomArray, getRandomArrayElement}
