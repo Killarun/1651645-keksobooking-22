@@ -1,6 +1,12 @@
 'use strict';
-import { returnMainMarkerPosition, resetAddressCoordinates,  MARKER_START } from './map.js';
-import { pullDataServer } from './server.js';
+import {
+  returnMainMarkerPosition,
+  resetAddressCoordinates,
+  MARKER_START
+} from './map.js';
+import {
+  pullDataServer
+} from './server.js';
 
 const typeBuilding = document.querySelector('#type');
 const cellPrice = document.querySelector('#price');
@@ -45,7 +51,7 @@ timeOut.addEventListener('change', onTimeOutChange);
 const onCloseModalWindow = (element) => {
   document.addEventListener('click', () => {
     removeWindowMessage(element);
-    removeEventListener('click',  onCloseModalWindow);
+    removeEventListener('click', onCloseModalWindow);
   });
 };
 
@@ -57,7 +63,7 @@ const onCloseModalWindowEsc = (element) => {
   window.addEventListener('keydown', (evt) => {
     if (evt.keyCode === 27) {
       removeWindowMessage(element);
-      removeEventListener('keydown',  onCloseModalWindowEsc);
+      removeEventListener('keydown', onCloseModalWindowEsc);
     }
   });
 };
@@ -71,7 +77,7 @@ const showMessageResult = (element) => {
 const onCloseButtonErrorMessage = () => {
   adButtonClose.addEventListener('click', () => {
     removeWindowMessage(error);
-    removeEventListener(onCloseButtonErrorMessage);
+    removeEventListener('click', onCloseButtonErrorMessage);
   });
 };
 
@@ -80,7 +86,7 @@ adClearButton.addEventListener('click', (evt) => {
   formMain.reset();
   returnMainMarkerPosition(MARKER_START);
   resetAddressCoordinates();
-  removeEventListener(adClearButton);
+  removeEventListener('click', adClearButton);
 });
 
 const checkStatus = (response) => {
@@ -105,4 +111,3 @@ formMain.addEventListener('submit', (evt) => {
       onCloseButtonErrorMessage()
     })
 });
-
