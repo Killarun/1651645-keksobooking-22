@@ -3,9 +3,7 @@
 import _ from 'lodash';
 //import L from 'leaflet';
 
-import {
-  removeMarkers, addOtherPins
-} from './map.js';
+import { removeMarkers, addOtherPins } from './map.js';
 
 const INTERVAL = 500;
 const mapFilters = document.querySelector('.map__filters');
@@ -30,18 +28,18 @@ const priceFilter = {
   },
 };
 
-const filterTemplate = function (element, property, meaning) {
+const filterTemplate = (element, property, meaning) => {
   if (property.value === 'any') {
     return true;
   }
   return element.offer[meaning].toString() === property.value;
 };
 
-const filterItemsHouse = function (element) {
+const filterItemsHouse = (element) => {
   return filterTemplate(element, houseTypes, 'type') && filterTemplate(element, roomNumbers, 'rooms') && filterTemplate(element, guestNumbers, 'guests');
 };
 
-const filterPrice = function (element) {
+const filterPrice = (element) => {
   const filteringPrice = priceFilter[housePrice.value.toUpperCase()];
   if (housePrice.value === 'any') {
     return true;
@@ -49,14 +47,14 @@ const filterPrice = function (element) {
   return element.offer.price >= filteringPrice.MIN && element.offer.price <= filteringPrice.MAX;
 };
 
-const filterFeatures = function (element) {
+const filterFeatures = (element) => {
   const checkedFeatures = houseFeatures.querySelectorAll('input:checked');
-  return Array.from(checkedFeatures).every(function(item) {
+  return Array.from(checkedFeatures).every((item) => {
     return element.offer.features.includes(item.value);
   });
 };
 
-const filterHouseTypes = function (houseElements) {
+const filterHouseTypes = (houseElements) => {
   mapFilters.addEventListener('change', _.debounce(() => {
     const sameType = houseElements
       .filter(filterItemsHouse)
@@ -67,6 +65,4 @@ const filterHouseTypes = function (houseElements) {
   }, INTERVAL));
 };
 
-export {
-  filterHouseTypes
-};
+export { filterHouseTypes };

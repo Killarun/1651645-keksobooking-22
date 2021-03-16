@@ -20,7 +20,7 @@ const TYPES = {
 const popupTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 
-const getWordForm = function (num, wordForms) {
+const getWordForm = (num, wordForms) => {
   if (num > 1 && num < 5) {
 
     return wordForms[1];
@@ -34,18 +34,25 @@ const getWordForm = function (num, wordForms) {
   return wordForms[2];
 };
 
-const getPhotos = function (container, photos) {
-  container.innerHTML = '';
-  container.insertAdjacentHTML('afterbegin', photos.map((photos) => `<img src="${photos}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('\n'));
+const getPhotos = (element, source) => {
+  if (!source.length) {
+    element.remove();
+  } else {
+    element.insertAdjacentHTML('afterbegin', source.map((photos) => `<img src="${photos}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('\n'));
+  }
 };
 
-const getFeatures = function (container, features) {
-  container.innerHTML = '';
-  container.insertAdjacentHTML('afterbegin', features.map((feature) => `<li class="popup__feature popup__feature--${feature}"></li>`)
-    .join('\n'));
+const getFeatures = (container, features) => {
+  if (!features.length) {
+    container.remove();
+  } else {
+    container.innerHTML = '';
+    container.insertAdjacentHTML('afterbegin', features.map((feature) => `<li class="popup__feature popup__feature--${feature}"></li>`)
+      .join('\n'));
+  }
 };
 
-const generatePopup = function (adData) {
+const generatePopup = (adData) => {
   const popup = popupTemplate.cloneNode(true);
   popup.querySelector('.popup__avatar').src = adData.author.avatar;
   popup.querySelector('.popup__title').textContent = adData.offer.title;

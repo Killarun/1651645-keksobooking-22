@@ -9,13 +9,6 @@ const getRandomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const getRandomNumber = (min, max, range) => {
-  if (max <= min || min < 0)  {
-    return null;
-  }
-  return Number((Math.random() * (max - min) + min).toFixed(range));
-};
-
 const getRandomShuffleArrayElement = function (elements) {
 
   const clonedElements = elements.slice(0);
@@ -28,12 +21,3 @@ const getRandomShuffleArrayElement = function (elements) {
   return clonedElements;
 }
 
-const getRandomArray = function (elements) {
-  getRandomShuffleArrayElement(elements).slice(getRandomInteger(0, elements.length - 1))
-};
-
-const getRandomArrayElement = function (elements) {
-  elements[getRandomInteger(0, elements.length - 1)]
-};
-
-export  {getRandomInteger, getRandomNumber, getRandomArray, getRandomArrayElement}

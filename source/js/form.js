@@ -24,17 +24,17 @@ const minPrice = {
   palace: 10000,
 };
 
-const onTypeBuldingChange = function () {
+const onTypeBuldingChange = () => {
   const price = minPrice[this.value];
   cellPrice.setAttribute('min', price);
   cellPrice.setAttribute('placeholder', price)
 };
 
-const onTimeInChange = function () {
+const onTimeInChange = () => {
   timeOut.selectedIndex = timeIn.selectedIndex;
 };
 
-const onTimeOutChange = function () {
+const onTimeOutChange = () => {
   timeIn.selectedIndex = timeOut.selectedIndex;
 };
 
@@ -42,44 +42,49 @@ typeBuilding.addEventListener('change', onTypeBuldingChange);
 timeIn.addEventListener('change', onTimeInChange);
 timeOut.addEventListener('change', onTimeOutChange);
 
-const onCloseModalWindow = function (element) {
+const onCloseModalWindow = (element) => {
   document.addEventListener('click', () => {
     removeWindowMessage(element);
+    removeEventListener('click',  onCloseModalWindow);
   });
 };
 
-const removeWindowMessage = function (element) {
+const removeWindowMessage = (element) => {
   element.remove();
 };
 
-const onCloseModalWindowEsc = function (element) {
+const onCloseModalWindowEsc = (element) => {
   window.addEventListener('keydown', (evt) => {
     if (evt.keyCode === 27) {
       removeWindowMessage(element);
+      removeEventListener('keydown',  onCloseModalWindowEsc);
     }
   });
 };
 
-const showMessageResult= function (element) {
+const showMessageResult = (element) => {
   adPromo.insertAdjacentElement('beforebegin', element);
   onCloseModalWindow(element);
   onCloseModalWindowEsc(element);
 };
 
-const onCloseButtonErrorMessage = function() {
+const onCloseButtonErrorMessage = () => {
   adButtonClose.addEventListener('click', () => {
     removeWindowMessage(error);
+    removeWindowMessage(element);
+    removeEventListener('click', onCloseButtonErrorMessage);
   });
 };
 
 adClearButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   formMain.reset();
-  returnMainMarkerPosition();
+  returnMainMarkerPosition(MARKER_START);
   resetAddressCoordinates();
+  removeEventListener(adClearButton);
 });
 
-const checkStatus = function (response) {
+const checkStatus = (response) => {
   if (response.ok) {
     return response;
   } else {
@@ -101,3 +106,4 @@ formMain.addEventListener('submit', (evt) => {
       onCloseButtonErrorMessage()
     })
 });
+

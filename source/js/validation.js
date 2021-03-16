@@ -2,13 +2,13 @@ const quantityRooms = document.querySelector('#room_number');
 const quantityGuestsPlace = document.querySelector('#capacity');
 const quantityGuestValues = quantityGuestsPlace.children;
 
-const disablePlace = function (listElements) {
+const disablePlace = (listElements) => {
   for (const currentValue of listElements) {
     currentValue.setAttribute('disabled', 'disabled');
   }
 };
 
-const onCheckRooms= function () {
+const onCheckRooms= () => {
   disablePlace(quantityGuestValues);
   if (this.value === '1') {
     quantityGuestsPlace.options[2].removeAttribute('disabled');
