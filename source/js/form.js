@@ -71,8 +71,7 @@ const showMessageResult = (element) => {
 const onCloseButtonErrorMessage = () => {
   adButtonClose.addEventListener('click', () => {
     removeWindowMessage(error);
-    removeWindowMessage(element);
-    removeEventListener('click', onCloseButtonErrorMessage);
+    removeEventListener(onCloseButtonErrorMessage);
   });
 };
 

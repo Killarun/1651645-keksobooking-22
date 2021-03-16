@@ -21,3 +21,4 @@ const getRandomShuffleArrayElement = function (elements) {
   return clonedElements;
 }
 
+export { getRandomInteger, getRandomShuffleArrayElement }
