@@ -24,17 +24,30 @@ const adButtonClose = error.querySelector('.error__button');
 const adClearButton = document.querySelector('.ad-form__reset');
 
 const minPrice = {
-  bungalow: 0,
-  flat: 1000,
-  house: 5000,
-  palace: 10000,
+  'flat': {
+    ruLabel: 'Квартира',
+    price: 1000,
+  },
+  'bungalow': {
+    ruLabel: 'Бунгало',
+    price: 0,
+  },
+  'house': {
+    ruLabel: 'Дом',
+    price: 5000,
+  },
+  'palace': {
+    ruLabel: 'Дворец',
+    price: 10000,
+  },
 };
 
+
 const onTypeBuldingChange = () => {
-  const price = minPrice[this.value];
-  cellPrice.setAttribute('min', price);
-  cellPrice.setAttribute('placeholder', price)
-};
+  const apartmentPrice = minPrice[type.value].price
+  cellPrice.min = apartmentPrice;
+  cellPrice.placeholder = apartmentPrice;
+}
 
 const onTimeInChange = () => {
   timeOut.selectedIndex = timeIn.selectedIndex;
