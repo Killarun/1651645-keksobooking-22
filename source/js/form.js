@@ -86,7 +86,6 @@ adClearButton.addEventListener('click', (evt) => {
   formMain.reset();
   returnMainMarkerPosition(MARKER_START);
   resetAddressCoordinates();
-  removeEventListener('click', adClearButton);
 });
 
 const checkStatus = (response) => {
