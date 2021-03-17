@@ -44,7 +44,7 @@ const minPrice = {
 
 
 const onTypeBuldingChange = () => {
-  const apartmentPrice = minPrice[type.value].price
+  const apartmentPrice = minPrice[typeBuilding.value].price
   cellPrice.min = apartmentPrice;
   cellPrice.placeholder = apartmentPrice;
 }
